@@ -1,13 +1,13 @@
 import { RootState } from "../store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getTokenFromLocalStorage } from "./tokenManager";
-import { History, User } from "./types";
+import { User } from "./types";
 
 // Define a type for the slice state
 export type UserSliceState = {
   token?: string;
   authenticatedUser?: User;
-  personalHistory?: History[];
+  users?: User[];
 };
 
 // Define the initial state using that type
@@ -33,8 +33,8 @@ export const userSlice = createSlice({
       if (state.authenticatedUser)
         state.authenticatedUser.balance += action.payload;
     },
-    setPersonalHistory: (state, action: PayloadAction<History[]>) => {
-      state.personalHistory = action.payload;
+    setUsersList: (state, action: PayloadAction<User[]>) => {
+      state.users = action.payload;
     },
   },
 });
@@ -44,14 +44,13 @@ export const {
   clearToken,
   setAuthenticatedUser,
   changeUserBalance,
-  setPersonalHistory,
+  setUsersList,
 } = userSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const getToken = (state: RootState) => state.user.token;
 export const getAuthenticatedUser = (state: RootState) =>
   state.user.authenticatedUser;
-export const getPersonalHistory = (state: RootState) =>
-  state.user.personalHistory;
+export const getUsers = (state: RootState) => state.user.users;
 
 export default userSlice.reducer;

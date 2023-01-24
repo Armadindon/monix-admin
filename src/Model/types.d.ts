@@ -3,12 +3,9 @@ export type User = {
   id: number;
   username: string;
   email: string;
-  provider: string;
-  confirmed: boolean;
-  blocked: boolean;
   balance: number;
   avatar?: string;
-  createdAt: string;
+  admin: boolean;
   updatedAt: string;
 };
 

@@ -7,6 +7,7 @@ import PageNavigator from "./Components/PageNavigator";
 import { getToken } from "./Model/UserSlice";
 import LoginPage from "./Pages/LoginPage";
 import MainPanel from "./Pages/MainPanel";
+import UsersPage from "./Pages/UsersPage";
 
 // On crée plusieurs contexte afin de permettre de fournir ces informations à
 
@@ -19,7 +20,8 @@ function App() {
       <PageNavigator
         pages={{
           login: <LoginPage />,
-          mainMenu: <MainPanel />
+          mainMenu: <MainPanel />,
+          users: <UsersPage />,
         }}
       >
         <AppDrawer />

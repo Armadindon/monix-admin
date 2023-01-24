@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "../hook";
 import { getAuthenticatedUser, setAuthenticatedUser } from "../Model/UserSlice";
 import sendApiRequest from "../Model/WebApi";
-import { ReactComponent as MonixCoin } from "./../assets/monixcoin.svg";
 import config from "../config";
+import { changePage } from "../Model/ApplicationSlice";
 
 const MainPanel = () => {
   const dispatch = useAppDispatch();
@@ -45,22 +45,6 @@ const MainPanel = () => {
           src={`${config.urlBackend}/images/${user.avatar}`}
         />
       )}
-      <Typography variant="h5" sx={{ display: "flex", alignItems: "center" }}>
-        {!user ? (
-          <Skeleton width="40vw" />
-        ) : (
-          <>
-            Tu as {user.balance.toFixed(1)}
-            <MonixCoin
-              style={{
-                marginLeft: ".25em",
-                maxHeight: "1.25em",
-                maxWidth: "1.25em",
-              }}
-            />
-          </>
-        )}
-      </Typography>
       <Box
         sx={{
           display: "flex",
@@ -70,33 +54,20 @@ const MainPanel = () => {
           justifyContent: "space-evenly",
         }}
       >
-        <Button
-          variant="contained"
-          size="large"
-          onClick={() => null}
-          disabled
-        >
+        <Button variant="contained" size="large" onClick={() => null} disabled>
           Dashboard
         </Button>
         <Button
           variant="contained"
           size="large"
-          onClick={() => null}
+          onClick={() => dispatch(changePage("users"))}
         >
           Gérer les membres
         </Button>
-        <Button
-          variant="contained"
-          size="large"
-          onClick={() => null}
-        >
+        <Button variant="contained" size="large" onClick={() => null}>
           Gérer les produits
         </Button>
-        <Button
-          variant="contained"
-          size="large"
-          onClick={() => null}
-        >
+        <Button variant="contained" size="large" onClick={() => null}>
           Consulter l&apos;historique
         </Button>
       </Box>
