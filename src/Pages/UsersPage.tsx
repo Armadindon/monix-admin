@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch } from "../hook";
-import { getUsers, setUsersList } from "../Model/UserSlice";
+import { getUsers, setEditedUser, setUsersList } from "../Model/UserSlice";
 import { useSelector } from "react-redux";
 import sendApiRequest from "../Model/WebApi";
 import config from "../config";
@@ -26,12 +26,24 @@ import Add from "@mui/icons-material/Add";
 import Close from "@mui/icons-material/Close";
 import Done from "@mui/icons-material/Done";
 import { User } from "../Model/types";
+import { addSnackbarMessage, changePage } from "../Model/ApplicationSlice";
 
 const UsersPage = () => {
   const dispatch = useAppDispatch();
   const users = useSelector(getUsers);
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [showedUsers, setShowedUsers] = useState<User[]>(users || []);
+  const [search, setSearch] = useState("");
+
+  const updateFilter = () => {
+    if (users)
+      setShowedUsers(
+        users.filter(
+          (user) =>
+            user.username.includes(search) || user.email.includes(search)
+        )
+      );
+  };
 
   const fetchUsers = async () => {
     const usersRequest = await sendApiRequest({
@@ -42,8 +54,31 @@ const UsersPage = () => {
     setShowedUsers(usersRequest?.data.data);
   };
 
+  const deleteSelectedUsers = async () => {
+    for (const userId of selectedUsers)
+      sendApiRequest({ url: `/users/${userId}`, method: "DELETE" });
+
+    dispatch(
+      dispatch(
+        setUsersList(
+          showedUsers?.filter((usr) => !selectedUsers.includes(usr.id)) || []
+        )
+      )
+    );
+    setSelectedUsers([]);
+    dispatch(
+      addSnackbarMessage({
+        message: "Le / Les utilisateur(s) ont bien été supprimés",
+        options: { variant: "success" },
+      })
+    );
+  };
+
   useEffect(() => {
-    if (users !== undefined) return;
+    if (users !== undefined) {
+      updateFilter();
+      return;
+    }
     fetchUsers();
   }, [users]);
 
@@ -59,15 +94,10 @@ const UsersPage = () => {
       >
         <Input
           sx={{ flexGrow: 1, margin: "10px" }}
+          value={search}
           onChange={(evt) => {
-            if (users)
-              setShowedUsers(
-                users.filter(
-                  (user) =>
-                    user.username.includes(evt.currentTarget.value) ||
-                    user.email.includes(evt.currentTarget.value)
-                )
-              );
+            setSearch(evt.currentTarget.value);
+            updateFilter();
           }}
           endAdornment={
             <InputAdornment position="end">
@@ -76,13 +106,33 @@ const UsersPage = () => {
           }
         />
         <ButtonGroup variant="contained" sx={{ margin: "10px" }}>
-          <Button color="success">
+          <Button
+            color="success"
+            onClick={() => {
+              dispatch(setEditedUser(undefined));
+              dispatch(changePage("editUser"));
+            }}
+          >
             <Add />
           </Button>
-          <Button color="warning" disabled={selectedUsers.length !== 1}>
+          <Button
+            color="warning"
+            disabled={selectedUsers.length !== 1}
+            onClick={() => {
+              const editedUser = users?.find(
+                (user) => user.id === selectedUsers[0]
+              );
+              dispatch(setEditedUser(editedUser));
+              dispatch(changePage("editUser"));
+            }}
+          >
             <Edit />
           </Button>
-          <Button color="error" disabled={selectedUsers.length === 0}>
+          <Button
+            color="error"
+            disabled={selectedUsers.length === 0}
+            onClick={deleteSelectedUsers}
+          >
             <Delete />
           </Button>
         </ButtonGroup>

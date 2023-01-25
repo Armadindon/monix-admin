@@ -8,6 +8,7 @@ import { getToken } from "./Model/UserSlice";
 import LoginPage from "./Pages/LoginPage";
 import MainPanel from "./Pages/MainPanel";
 import UsersPage from "./Pages/UsersPage";
+import EditAccount from "./Pages/EditAccount";
 
 // On crée plusieurs contexte afin de permettre de fournir ces informations à
 
@@ -22,6 +23,7 @@ function App() {
           login: <LoginPage />,
           mainMenu: <MainPanel />,
           users: <UsersPage />,
+          editUser: <EditAccount />,
         }}
       >
         <AppDrawer />

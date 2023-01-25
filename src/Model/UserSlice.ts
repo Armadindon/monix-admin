@@ -8,6 +8,7 @@ export type UserSliceState = {
   token?: string;
   authenticatedUser?: User;
   users?: User[];
+  editedUser?: User;
 };
 
 // Define the initial state using that type
@@ -36,6 +37,9 @@ export const userSlice = createSlice({
     setUsersList: (state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
     },
+    setEditedUser: (state, action: PayloadAction<User | undefined>) => {
+      state.editedUser = action.payload;
+    },
   },
 });
 
@@ -45,6 +49,7 @@ export const {
   setAuthenticatedUser,
   changeUserBalance,
   setUsersList,
+  setEditedUser,
 } = userSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
@@ -52,5 +57,6 @@ export const getToken = (state: RootState) => state.user.token;
 export const getAuthenticatedUser = (state: RootState) =>
   state.user.authenticatedUser;
 export const getUsers = (state: RootState) => state.user.users;
+export const getEditedUser = (state: RootState) => state.user.editedUser;
 
 export default userSlice.reducer;

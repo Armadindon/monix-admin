@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getTokenFromLocalStorage } from "./tokenManager";
 import { OptionsObject } from "notistack";
 
-export type Pages = "login" | "mainMenu" | "users";
+export type Pages = "login" | "mainMenu" | "users" | "editUser";
 
 export type SnackBarMessage = {
   message: string;
