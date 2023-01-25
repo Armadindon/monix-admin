@@ -13,7 +13,7 @@ RUN npm run build
 FROM nginx:stable-alpine
 
 # Permit to link the repo to the repository
-LABEL org.opencontainers.image.source https://github.com/ClubNix/monix-2.0
+LABEL org.opencontainers.image.source https://github.com/Armadindon/monix-admin
 
 COPY --from=build /app/build /usr/share/nginx/html
 COPY --from=build /app/start.sh /app/
