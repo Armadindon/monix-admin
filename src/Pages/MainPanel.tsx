@@ -64,7 +64,11 @@ const MainPanel = () => {
         >
           Gérer les membres
         </Button>
-        <Button variant="contained" size="large" onClick={() => null}>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => dispatch(changePage("products"))}
+        >
           Gérer les produits
         </Button>
         <Button variant="contained" size="large" onClick={() => null}>
