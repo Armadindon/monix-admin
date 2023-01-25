@@ -5,7 +5,6 @@ import {
   Checkbox,
   Input,
   InputAdornment,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -82,6 +81,10 @@ const UsersPage = () => {
     fetchUsers();
   }, [users]);
 
+  useEffect(() => {
+    updateFilter();
+  }, [search]);
+
   return (
     <>
       <div
@@ -90,6 +93,7 @@ const UsersPage = () => {
           flexFlow: "row nowrap",
           justifyContent: "space-between",
           width: "100%",
+          height: "50px",
         }}
       >
         <Input
@@ -97,7 +101,6 @@ const UsersPage = () => {
           value={search}
           onChange={(evt) => {
             setSearch(evt.currentTarget.value);
-            updateFilter();
           }}
           endAdornment={
             <InputAdornment position="end">
@@ -138,8 +141,8 @@ const UsersPage = () => {
         </ButtonGroup>
       </div>
       {users && (
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableContainer sx={{ height: "85vh" }}>
+          <Table sx={{ minWidth: 650 }} stickyHeader aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>
