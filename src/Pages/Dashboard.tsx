@@ -1,6 +1,6 @@
 import React from "react";
-import { Paper, Typography } from "@mui/material";
-import LowStockProducts from "../Components/LowStockProducts";
+import LowStockProductsWidget from "../Components/LowStockProductsWidget";
+import NegativeBalanceUsersWidget from "../Components/NegativeBalanceMembersWidget";
 
 const Dashboard = () => {
   return (
@@ -9,12 +9,13 @@ const Dashboard = () => {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
-        gap: "10px",
+        gap: "30px",
         rowGap: "10px",
         margin: "20px",
       }}
     >
-      <LowStockProducts />
+      <LowStockProductsWidget />
+      <NegativeBalanceUsersWidget />
     </div>
   );
 };

@@ -41,15 +41,19 @@ const LowStockProducts = () => {
   return (
     <Paper
       elevation={3}
-      sx={{ width: "500px", height: "300px", padding: "10px" }}
+      sx={{
+        width: "500px",
+        height: "300px",
+        padding: "10px",
+        overflow: "hidden",
+      }}
     >
       <Typography variant="h6">Produit avec un stock faible</Typography>
-      <TableContainer component={Paper}>
-        <Table
-          stickyHeader
-          sx={{ width: "100%", height: "100%" }}
-          aria-label="simple table"
-        >
+      <TableContainer
+        component={Paper}
+        sx={{ width: "100%", maxHeight: "90%" }}
+      >
+        <Table stickyHeader aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Nom</TableCell>
