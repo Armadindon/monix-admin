@@ -54,7 +54,11 @@ const MainPanel = () => {
           justifyContent: "space-evenly",
         }}
       >
-        <Button variant="contained" size="large" onClick={() => null} disabled>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => dispatch(changePage("dashboard"))}
+        >
           Dashboard
         </Button>
         <Button
@@ -70,9 +74,6 @@ const MainPanel = () => {
           onClick={() => dispatch(changePage("products"))}
         >
           Gérer les produits
-        </Button>
-        <Button variant="contained" size="large" onClick={() => null}>
-          Consulter l&apos;historique
         </Button>
       </Box>
     </Box>

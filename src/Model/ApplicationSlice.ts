@@ -9,7 +9,8 @@ export type Pages =
   | "users"
   | "editUser"
   | "products"
-  | "editProduct";
+  | "editProduct"
+  | "dashboard";
 
 export type SnackBarMessage = {
   message: string;

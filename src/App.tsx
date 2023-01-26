@@ -11,6 +11,7 @@ import UsersPage from "./Pages/UsersPage";
 import EditAccount from "./Pages/EditAccount";
 import ProductsPage from "./Pages/ProductPage";
 import EditProduct from "./Pages/EditProduct";
+import Dashboard from "./Pages/Dashboard";
 
 // On crée plusieurs contexte afin de permettre de fournir ces informations à
 
@@ -28,6 +29,7 @@ function App() {
           editUser: <EditAccount />,
           products: <ProductsPage />,
           editProduct: <EditProduct />,
+          dashboard: <Dashboard />,
         }}
       >
         <AppDrawer />
