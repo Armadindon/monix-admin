@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Button, IconButton, TextField } from "@mui/material";
+import { Button, IconButton, Modal, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -14,6 +14,7 @@ import {
   setEditedProduct,
   setProducts,
 } from "../Model/ProductSlice";
+import BarcodeDecoder from "../Components/BarcodeDecoder";
 
 const EditProduct = () => {
   const user = useSelector(getEditedProduct);
@@ -32,6 +33,7 @@ const EditProduct = () => {
       } as Partial<User>)
   );
   const [imageFile, setImageFile] = useState<File | undefined>();
+  const [scannerModalOpened, setScannerModalOpened] = useState(false);
 
   const editProduct = async () => {
     //On update le produit
@@ -130,6 +132,31 @@ const EditProduct = () => {
             alignItems: "center",
           }}
         >
+          <Modal
+            open={scannerModalOpened}
+            onClose={() => setScannerModalOpened(false)}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <BarcodeDecoder
+              onResult={(result) => {
+                setScannerModalOpened(false);
+                setLocalEditedProduct({
+                  ...editedProduct,
+                  barcode: result.barcode,
+                });
+                dispatch(
+                  addSnackbarMessage({
+                    message: "Code barre trouvé !",
+                    options: { variant: "info" },
+                  })
+                );
+              }}
+            />
+          </Modal>
           <input
             ref={imageRef}
             type="file"
@@ -202,7 +229,12 @@ const EditProduct = () => {
               })
             }
           />
-          <Button variant="contained" size="large" sx={{ margin: "20px" }}>
+          <Button
+            variant="contained"
+            size="large"
+            sx={{ margin: "20px" }}
+            onClick={() => setScannerModalOpened(true)}
+          >
             Scanner le code barre
           </Button>
 
