@@ -31,4 +31,5 @@ export type History = {
   updatedAt: string;
   date: string;
   Product: Product;
+  User: User;
 };

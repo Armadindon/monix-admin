@@ -10,10 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { getProducts, setProducts } from "../Model/ProductSlice";
 import sendApiRequest from "../Model/WebApi";
 import { useAppDispatch } from "../hook";
-import { Product, User } from "../Model/types";
+import { User } from "../Model/types";
 import { getUsers, setUsersList } from "../Model/UserSlice";
 
 const NegativeBalanceUsersWidget = () => {
@@ -30,7 +29,7 @@ const NegativeBalanceUsersWidget = () => {
       setFilteredUsers(
         users
           ?.filter((usr) => usr.balance < 0)
-          .sort((a, b) => b.balance - a.balance) || []
+          .sort((a, b) => a.balance - b.balance) || []
       );
       return;
     }
@@ -49,7 +48,7 @@ const NegativeBalanceUsersWidget = () => {
     <Paper
       elevation={3}
       sx={{
-        width: "500px",
+        width: "30vw",
         height: "300px",
         padding: "10px",
         overflow: "hidden",

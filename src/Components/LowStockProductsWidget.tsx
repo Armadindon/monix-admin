@@ -42,7 +42,7 @@ const LowStockProducts = () => {
     <Paper
       elevation={3}
       sx={{
-        width: "500px",
+        width: "30vw",
         height: "300px",
         padding: "10px",
         overflow: "hidden",

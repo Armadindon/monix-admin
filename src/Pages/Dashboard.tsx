@@ -1,6 +1,7 @@
 import React from "react";
 import LowStockProductsWidget from "../Components/LowStockProductsWidget";
 import NegativeBalanceUsersWidget from "../Components/NegativeBalanceMembersWidget";
+import LastTransactionsWidget from "../Components/LastTransactionsWidget";
 
 const Dashboard = () => {
   return (
@@ -16,6 +17,7 @@ const Dashboard = () => {
     >
       <LowStockProductsWidget />
       <NegativeBalanceUsersWidget />
+      <LastTransactionsWidget />
     </div>
   );
 };
