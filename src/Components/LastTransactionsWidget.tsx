@@ -64,7 +64,7 @@ const LastTransactionsWidget = () => {
               >
                 <TableCell>{history.date}</TableCell>
                 <TableCell>{history.description}</TableCell>
-                <TableCell>{history.amount}</TableCell>
+                <TableCell>{history.movement}</TableCell>
                 <TableCell>{history.User.username}</TableCell>
                 <TableCell>{history.Product.name}</TableCell>
               </TableRow>
