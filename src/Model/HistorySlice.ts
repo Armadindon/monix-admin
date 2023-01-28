@@ -10,7 +10,7 @@ export type HistorySliceState = {
 // Define the initial state using that type
 const initialState: HistorySliceState = {};
 
-export const userSlice = createSlice({
+export const historySlice = createSlice({
   name: "history",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
@@ -21,9 +21,9 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setHistory } = userSlice.actions;
+export const { setHistory } = historySlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const getHistory = (state: RootState) => state.history.histories;
 
-export default userSlice.reducer;
+export default historySlice.reducer;
