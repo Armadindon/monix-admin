@@ -37,6 +37,20 @@ const LoginPage = () => {
         }
       );
       const jwtToken = loginResponse.data?.data?.token;
+      const decodedToken = JSON.parse(atob(jwtToken.split(".")[1]));
+      if (!decodedToken.admin) {
+        dispatch(
+          addSnackbarMessage({
+            message:
+              "Un accès administrateur est nécéssaire pour cette application ! Merci de vous reconnecter",
+            options: {
+              variant: "error",
+            },
+          })
+        );
+        return;
+      }
+
       dispatch(setToken(jwtToken));
       // Si l'utilisateur demande a qu'on se rappelle de sa connexion, on stocke dans le localstorage
       if (rememberMe) setTokenLocal(jwtToken);
