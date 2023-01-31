@@ -38,7 +38,9 @@ const ProductsPage = () => {
   const updateFilter = () => {
     if (products)
       setShowedProduct(
-        products.filter((product) => product.name.includes(search))
+        products.filter((product) =>
+          product.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        )
       );
   };
 

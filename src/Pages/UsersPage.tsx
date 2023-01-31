@@ -39,7 +39,10 @@ const UsersPage = () => {
       setShowedUsers(
         users.filter(
           (user) =>
-            user.username.includes(search) || user.email.includes(search)
+            user.username
+              .toLocaleLowerCase()
+              .includes(search.toLocaleLowerCase()) ||
+            user.email.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )
       );
   };
